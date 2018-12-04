@@ -28,27 +28,24 @@ public class ProductService {
         return result;
     }
 
-    public List<Product> findAllByName(String name) {
-        List<Product> result = new ArrayList<Product>();
-        name = name.toLowerCase();
-
+    public ProductService findAllByName(String name) {
+        ProductService service = new ProductService(new ProductRepository());
         for (Product product : repository.getAll()) {
-            if (product.getName().toLowerCase().contains(name)) {
-                result.add(product);
+            if (product.getName().contains(name)) {
+                service.add(product);
             }
         }
-        return result;
+        return service;
     }
 
-    public List<Product> findAllByCategory(String category) {
-        List<Product> result = new ArrayList<Product>();
-        category = category.toLowerCase();
-
+    public ProductService findAllByCategory (String category) {
+        ProductService service = new ProductService(new ProductRepository());
         for (Product product : repository.getAll()) {
-            if (product.getCategory().toLowerCase().contains(category)) {
-                result.add(product);
+            if (product.getCategory().equalsIgnoreCase(category)) {
+                service.add(product);
             }
         }
-        return result;
+        return service;
     }
+
 }
